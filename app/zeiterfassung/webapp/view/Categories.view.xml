@@ -1,0 +1,30 @@
+<mvc:View controllerName="zeiterfassung.controller.Categories"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <Button
+            press="onCreateCategory"
+            icon="sap-icon://add"
+            text="Create Category" />
+        <Table
+            id="categoriesTable"
+            items="{/Categories}">
+            <columns>
+                <Column>
+                    <Text text="Name"/>
+                </Column>
+                <Column>
+                    <Text text="Category Type"/>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{name}" />
+                        <Text text="{categoryType}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>

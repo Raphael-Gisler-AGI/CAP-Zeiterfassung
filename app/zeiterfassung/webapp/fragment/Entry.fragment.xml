@@ -1,0 +1,3 @@
+<Dialog xmlns="sap.m">
+    <Text text="Test" />
+</Dialog>
