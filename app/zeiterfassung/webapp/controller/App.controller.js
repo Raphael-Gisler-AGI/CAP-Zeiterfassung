@@ -16,5 +16,10 @@ sap.ui.define(["./BaseController"], function (BaseController) {
       const key = oEvent.getParameter("item").getProperty("key");
       this.getRouter().navTo(key);
     },
+    onPressSave() {
+      this.getModel().submitBatch("$auto");
+
+      this.refresh();
+    }
   });
 });

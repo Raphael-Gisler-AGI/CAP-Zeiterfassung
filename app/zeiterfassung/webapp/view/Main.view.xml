@@ -1,7 +1,7 @@
 <mvc:View
     controllerName="zeiterfassung.controller.Main"
-    xmlns:f="sap.f"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
     xmlns="sap.m">
     <f:DynamicPage title="Table">
         <f:title>
@@ -19,8 +19,7 @@
             </f:DynamicPageTitle>
         </f:title>
         <f:content>
-            <Table
-                id="entriesTable">
+            <Table id="entriesTable">
                 <columns>
                     <Column>
                         <Text text="Description" />

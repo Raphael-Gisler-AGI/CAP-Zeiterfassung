@@ -11,12 +11,12 @@
                 <tnt:ToolHeader>
                     <Title text="Zeiterfassung" />
                     <ToolbarSpacer />
-                    <Button text="Timer" />
+                    <Button
+                        text="Timer" />
                 </tnt:ToolHeader>
             </tnt:header>
             <tnt:sideContent>
-                <tnt:SideNavigation
-                    itemSelect=".onSelectNavigationItem">
+                <tnt:SideNavigation itemSelect=".onSelectNavigationItem">
                     <tnt:NavigationList id="navigationList">
                         <tnt:items>
                             <tnt:NavigationListItem
@@ -43,6 +43,7 @@
             <OverflowToolbar>
                 <ToolbarSpacer />
                 <Button
+                    press=".onPressSave"
                     text="Save"
                     type="Accept" />
                 <Button

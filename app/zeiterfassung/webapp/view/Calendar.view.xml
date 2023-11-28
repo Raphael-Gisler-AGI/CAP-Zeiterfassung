@@ -2,12 +2,16 @@
 	controllerName="zeiterfassung.controller.Calendar"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
-	<ScrollContainer vertical="true" height="100%">
+	<ScrollContainer
+		vertical="true"
+		height="100%">
 		<SinglePlanningCalendar
+		 	id="singlePlanningCalendar"
 			appointments="{/Entries}"
 			stickyMode="All">
 			<appointments>
 				<unified:CalendarAppointment
+					id="calendarTemplate"
 					key="{ID}"
 					title="{category/name}"
 					description="{description}"

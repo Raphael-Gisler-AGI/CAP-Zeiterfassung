@@ -1,29 +1,56 @@
 <mvc:View
     controllerName="zeiterfassung.controller.Categories"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
     xmlns="sap.m">
-    <Button
-        press="onCreateCategory"
-        icon="sap-icon://add"
-        text="Create Category" />
-    <Table
-        id="categoriesTable"
-        items="{/Categories}">
-        <columns>
-            <Column>
-                <Text text="Name" />
-            </Column>
-            <Column>
-                <Text text="Category Type" />
-            </Column>
-        </columns>
-        <items>
-            <ColumnListItem>
-                <cells>
-                    <Text text="{name}" />
-                    <Text text="{categoryType}" />
-                </cells>
-            </ColumnListItem>
-        </items>
-    </Table>
+    <f:DynamicPage title="Table">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Categories" />
+                </f:heading>
+                <f:actions>
+                    <Button
+                        press=".onPressCreateCategory"
+                        type="Emphasized"
+                        icon="sap-icon://add"
+                        text="Create Category" />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <Table id="categoriesTable">
+                <columns>
+                    <Column>
+                        <Text text="Name" />
+                    </Column>
+                    <Column>
+                        <Text text="Category Type" />
+                    </Column>
+                    <Column>
+                        <Text text="Edit" />
+                    </Column>
+                    <Column>
+                        <Text text="Delete" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem
+                        id="categoriesItemTemplate"
+                        highlight="{= ${IsActiveEntity} === 'Ja' ? 'None' : 'Information'}">
+                        <cells>
+                            <Text text="{name}" />
+                            <Text text="{categoryType}" />
+                            <Button
+                                press=".onPressEditCategory"
+                                icon="sap-icon://edit" />
+                            <Button
+                                press=".onPressDeleteCategory"
+                                icon="sap-icon://delete" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>
