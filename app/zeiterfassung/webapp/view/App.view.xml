@@ -3,37 +3,52 @@
     xmlns:tnt="sap.tnt"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <tnt:ToolPage>
-        <tnt:header>
-            <tnt:ToolHeader>
-                <Title text="Zeiterfassung" />
+    <Page
+        showHeader="false"
+        floatingFooter="true">
+        <tnt:ToolPage>
+            <tnt:header>
+                <tnt:ToolHeader>
+                    <Title text="Zeiterfassung" />
+                    <ToolbarSpacer />
+                    <Button text="Timer" />
+                </tnt:ToolHeader>
+            </tnt:header>
+            <tnt:sideContent>
+                <tnt:SideNavigation
+                    itemSelect=".onSelectNavigationItem">
+                    <tnt:NavigationList id="navigationList">
+                        <tnt:items>
+                            <tnt:NavigationListItem
+                                key="RouteMain"
+                                icon="sap-icon://table-view"
+                                text="Table" />
+                            <tnt:NavigationListItem
+                                key="RouteCalendar"
+                                icon="sap-icon://calendar"
+                                text="Calendar" />
+                            <tnt:NavigationListItem
+                                key="RouteCategories"
+                                icon="sap-icon://activity-items"
+                                text="Categories" />
+                        </tnt:items>
+                    </tnt:NavigationList>
+                </tnt:SideNavigation>
+            </tnt:sideContent>
+            <tnt:mainContents>
+                <App id="app" />
+            </tnt:mainContents>
+        </tnt:ToolPage>
+        <footer>
+            <OverflowToolbar>
                 <ToolbarSpacer />
-                <Button text="Timer" />
-            </tnt:ToolHeader>
-        </tnt:header>
-        <tnt:sideContent>
-            <tnt:SideNavigation
-                itemSelect=".onSelectNavigationItem">
-                <tnt:NavigationList id="navigationList">
-                    <tnt:items>
-                        <tnt:NavigationListItem
-                            key="RouteMain"
-                            icon="sap-icon://table-view"
-                            text="Table" />
-                        <tnt:NavigationListItem
-                            key="RouteCalendar"
-                            icon="sap-icon://calendar"
-                            text="Calendar" />
-                        <tnt:NavigationListItem
-                            key="RouteCategories"
-                            icon="sap-icon://activity-items"
-                            text="Categories" />
-                    </tnt:items>
-                </tnt:NavigationList>
-            </tnt:SideNavigation>
-        </tnt:sideContent>
-        <tnt:mainContents>
-            <App id="app" />
-        </tnt:mainContents>
-    </tnt:ToolPage>
+                <Button
+                    text="Save"
+                    type="Accept" />
+                <Button
+                    text="Discard"
+                    type="Ghost" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
 </mvc:View>

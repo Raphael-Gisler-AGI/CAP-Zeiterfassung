@@ -1,7 +1,19 @@
-<mvc:View
+<mvc:View xmlns:unified="sap.ui.unified"
 	controllerName="zeiterfassung.controller.Calendar"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
-    <SinglePlanningCalendar>
-    </SinglePlanningCalendar>
+	<ScrollContainer vertical="true" height="100%">
+		<SinglePlanningCalendar
+			appointments="{/Entries}"
+			stickyMode="All">
+			<appointments>
+				<unified:CalendarAppointment
+					key="{ID}"
+					title="{category/name}"
+					description="{description}"
+					startDate="{startTime}"
+					endDate="{endTime}" />
+			</appointments>
+		</SinglePlanningCalendar>
+	</ScrollContainer>
 </mvc:View>

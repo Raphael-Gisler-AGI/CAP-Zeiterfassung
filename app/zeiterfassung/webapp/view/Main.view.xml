@@ -1,43 +1,65 @@
 <mvc:View
     controllerName="zeiterfassung.controller.Main"
+    xmlns:f="sap.f"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Button
-        press="onOpenCreateEntryDialog"
-        icon="sap-icon://add"
-        text="Create Entry" />
-    <Table
-        id="entriesTable"
-        items="{/Entries}">
-        <columns>
-            <Column>
-                <Text text="Description" />
-            </Column>
-            <Column>
-                <Text text="Category" />
-            </Column>
-            <Column>
-                <Text text="Start Time" />
-            </Column>
-            <Column>
-                <Text text="End Time" />
-            </Column>
-            <Column>
-                <Text text="Edit" />
-            </Column>
-            <Column>
-                <Text text="Delete" />
-            </Column>
-        </columns>
-        <items>
-            <ColumnListItem>
-                <cells>
-                    <Text text="{description}" />
-                    <Text text="{category/name}" />
-                    <Text text="{startTime}" />
-                    <Text text="{endTime}" />
-                </cells>
-            </ColumnListItem>
-        </items>
-    </Table>
+    <f:DynamicPage title="Table">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Table Overview" />
+                </f:heading>
+                <f:actions>
+                    <Button
+                        press=".onPressCreateEntry"
+                        type="Emphasized"
+                        icon="sap-icon://add"
+                        text="Create Entry" />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <Table
+                id="entriesTable">
+                <columns>
+                    <Column>
+                        <Text text="Description" />
+                    </Column>
+                    <Column>
+                        <Text text="Category" />
+                    </Column>
+                    <Column>
+                        <Text text="Start Time" />
+                    </Column>
+                    <Column>
+                        <Text text="End Time" />
+                    </Column>
+                    <Column>
+                        <Text text="Edit" />
+                    </Column>
+                    <Column>
+                        <Text text="Delete" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem
+                        id="entriesItemTemplate"
+                        highlight="{= ${IsActiveEntity} === 'Ja' ? 'None' : 'Information'}">
+                        <cells>
+                            <Text text="{description}" />
+                            <Text text="{category/name}" />
+                            <Text text="{startTime}" />
+                            <Text text="{endTime}" />
+                            <Button
+                                press=".onPressEditEntry"
+                                icon="sap-icon://edit" />
+                            <Button
+                                press=".onPressDeleteEntry"
+                                icon="sap-icon://delete" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>

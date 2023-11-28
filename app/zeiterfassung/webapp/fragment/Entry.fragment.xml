@@ -5,7 +5,8 @@
     <beginButton>
         <Button
             press="onPressSaveEntry"
-            text="Save" />
+            type="Emphasized"
+            text="Ok" />
     </beginButton>
     <endButton>
         <Button
