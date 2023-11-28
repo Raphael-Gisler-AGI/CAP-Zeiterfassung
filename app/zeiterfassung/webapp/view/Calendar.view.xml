@@ -1,0 +1,7 @@
+<mvc:View
+	controllerName="zeiterfassung.controller.Calendar"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+    <SinglePlanningCalendar>
+    </SinglePlanningCalendar>
+</mvc:View>

@@ -7,7 +7,7 @@ sap.ui.define(["./BaseController"], function (BaseController) {
       this.getView().setBusy(true);
       const result = tableItems.create({
         name: "",
-        categoryType: ""
+        categoryType: "",
       });
       await result.created();
       this.getView().setBusy(false);
@@ -27,16 +27,16 @@ sap.ui.define(["./BaseController"], function (BaseController) {
     async onPressSaveCategory(oEvent) {
       const context = oEvent.getSource().getBindingContext();
       await this.getOwnerComponent()
-          .getModel()
-          .bindContext(
-            `/Categories(ID=${context.getProperty(
-              "ID"
-            )},IsActiveEntity=false)/AdminService.draftActivate(...)`,
-            context
-          )
-          .execute();
-      this.refresh()
+        .getModel()
+        .bindContext(
+          `/Categories(ID=${context.getProperty(
+            "ID"
+          )},IsActiveEntity=false)/AdminService.draftActivate(...)`,
+          context
+        )
+        .execute();
       this.onCloseDialog();
-    }
+      this.refresh();
+    },
   });
 });

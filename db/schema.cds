@@ -6,17 +6,17 @@ using {
 namespace sap.capire.zeiterfassung;
 
 entity Entries : managed {
-    key ID          : Integer;
-        description : localized String(111) not null;
-        category    : Association to Categories;
+    key ID          : UUID;
+        description : String not null;
+        category    : Association to Categories not null;
         startTime   : DateTime not null;
         endTime     : DateTime not null;
 }
 
 entity Categories {
     key ID           : UUID;
-        name         : String(111) not null;
-        categoryType : CategoryTypes;
+        name         : String not null;
+        categoryType : CategoryTypes not null;
         entries      : Association to many Entries
                            on entries.category = $self;
 }

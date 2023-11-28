@@ -13,5 +13,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
     refresh() {
       this.getModel().refresh();
     },
+    getRouter() {
+      return this.getOwnerComponent().getRouter();
+    },
   });
 });

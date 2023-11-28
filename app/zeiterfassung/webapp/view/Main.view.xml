@@ -1,34 +1,43 @@
-<mvc:View controllerName="zeiterfassung.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+<mvc:View
+    controllerName="zeiterfassung.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <Button
-            press="onOpenCreateEntryDialog"
-            icon="sap-icon://add"
-            text="Create Entry" />
-        <Table
-            id="entriesTable"
-            items="{/Entries}">
-            <columns>
-                <Column>
-                    <Text text="Description"/>
-                </Column>
-                <Column>
-                    <Text text="Start Time"/>
-                </Column>
-                <Column>
-                    <Text text="End Time"/>
-                </Column>
-            </columns>
-            <items>
-                <ColumnListItem>
-                    <cells>
-                        <Text text="test" />
-                        <Text text="test" />
-                        <Text text="test" />
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>
-    </Page>
+    <Button
+        press="onOpenCreateEntryDialog"
+        icon="sap-icon://add"
+        text="Create Entry" />
+    <Table
+        id="entriesTable"
+        items="{/Entries}">
+        <columns>
+            <Column>
+                <Text text="Description" />
+            </Column>
+            <Column>
+                <Text text="Category" />
+            </Column>
+            <Column>
+                <Text text="Start Time" />
+            </Column>
+            <Column>
+                <Text text="End Time" />
+            </Column>
+            <Column>
+                <Text text="Edit" />
+            </Column>
+            <Column>
+                <Text text="Delete" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{description}" />
+                    <Text text="{category/name}" />
+                    <Text text="{startTime}" />
+                    <Text text="{endTime}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
 </mvc:View>

@@ -1,13 +1,13 @@
-sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
+sap.ui.define(["./BaseController"], function (BaseController) {
   "use strict";
 
-  return Controller.extend("zeiterfassung.controller.Main", {
+  return BaseController.extend("zeiterfassung.controller.Main", {
     async onOpenCreateEntryDialog() {
       const tableItems = this.byId("entriesTable").getBinding("items");
       this.getView().setBusy(true);
       const result = tableItems.create({
-        description: "test",
-        category: 1,
+        description: "",
+        category_ID: undefined,
         startTime: new Date(),
         endTime: new Date(),
       });
@@ -23,6 +23,23 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
         dialog.bindElement(result.getPath());
         dialog.open();
       });
+    },
+    onCloseDialog() {
+      this.byId("entryDialog").close();
+    },
+    async onPressSaveEntry(oEvent) {
+      const context = oEvent.getSource().getBindingContext();
+      await this.getOwnerComponent()
+        .getModel()
+        .bindContext(
+          `/Entries(ID=${context.getProperty(
+            "ID"
+          )},IsActiveEntity=false)/AdminService.draftActivate(...)`,
+          context
+        )
+        .execute();
+      this.onCloseDialog();
+      this.refresh();
     },
   });
 });

@@ -18,5 +18,16 @@
   "scripts": {
     "start": "cds-serve",
     "watch-zeiterfassung": "cds watch --open zeiterfassung/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": "db.sqlite"
+        },
+        "schema_evolution": "auto"
+      }
+    }
   }
 }
