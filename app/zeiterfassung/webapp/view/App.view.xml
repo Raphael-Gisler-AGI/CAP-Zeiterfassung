@@ -1,55 +1,24 @@
-<mvc:View
+<mvc:View xmlns:uxap="sap.uxap" xmlns:actiontoolbar="sap.ui.mdc.actiontoolbar" xmlns:mdc="sap.ui.mdc"
     controllerName="zeiterfassung.controller.App"
-    xmlns:tnt="sap.tnt"
+    xmlns:f="sap.f"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page
-        showHeader="false"
-        floatingFooter="true">
-        <tnt:ToolPage>
-            <tnt:header>
-                <tnt:ToolHeader>
-                    <Title text="Zeiterfassung" />
-                    <ToolbarSpacer />
+    <f:DynamicPage>
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>title}" />
+                </f:heading>
+                <f:actions>
                     <Button
-                        text="Timer" />
-                </tnt:ToolHeader>
-            </tnt:header>
-            <tnt:sideContent>
-                <tnt:SideNavigation itemSelect=".onSelectNavigationItem">
-                    <tnt:NavigationList id="navigationList">
-                        <tnt:items>
-                            <tnt:NavigationListItem
-                                key="RouteMain"
-                                icon="sap-icon://table-view"
-                                text="Table" />
-                            <tnt:NavigationListItem
-                                key="RouteCalendar"
-                                icon="sap-icon://calendar"
-                                text="Calendar" />
-                            <tnt:NavigationListItem
-                                key="RouteCategories"
-                                icon="sap-icon://activity-items"
-                                text="Categories" />
-                        </tnt:items>
-                    </tnt:NavigationList>
-                </tnt:SideNavigation>
-            </tnt:sideContent>
-            <tnt:mainContents>
-                <App id="app" />
-            </tnt:mainContents>
-        </tnt:ToolPage>
-        <footer>
-            <OverflowToolbar>
-                <ToolbarSpacer />
-                <Button
-                    press=".onPressSave"
-                    text="Save"
-                    type="Accept" />
-                <Button
-                    text="Discard"
-                    type="Ghost" />
-            </OverflowToolbar>
-        </footer>
-    </Page>
+                        type="Emphasized"
+                        icon="sap-icon://add"
+                        text="Create Entry" />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <App id="app" />
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>

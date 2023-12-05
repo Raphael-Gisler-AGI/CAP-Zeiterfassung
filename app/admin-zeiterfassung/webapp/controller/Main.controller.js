@@ -7,7 +7,7 @@ sap.ui.define([
     function (Controller) {
         "use strict";
 
-        return Controller.extend("zeiterfassung.controller.Main", {
+        return Controller.extend("adminzeiterfassung.controller.Main", {
             onInit: function () {
 
             }

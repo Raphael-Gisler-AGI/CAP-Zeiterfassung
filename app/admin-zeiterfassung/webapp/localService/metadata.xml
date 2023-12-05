@@ -13,20 +13,18 @@
         <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
     </edmx:Reference>
     <edmx:DataServices>
-        <Schema Namespace="UserService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Schema Namespace="AdminService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
             <EntityContainer Name="EntityContainer">
-                <EntitySet Name="Entries" EntityType="UserService.Entries">
+                <EntitySet Name="Entries" EntityType="AdminService.Entries">
                     <NavigationPropertyBinding Path="category" Target="Categories"/>
                 </EntitySet>
-                <EntitySet Name="Templates" EntityType="UserService.Templates"/>
-                <EntitySet Name="Categories" EntityType="UserService.Categories">
+                <EntitySet Name="Categories" EntityType="AdminService.Categories">
                     <NavigationPropertyBinding Path="CategoryType" Target="CategoryTypes"/>
                     <NavigationPropertyBinding Path="entries" Target="Entries"/>
                 </EntitySet>
-                <EntitySet Name="CategoryTypes" EntityType="UserService.CategoryTypes">
+                <EntitySet Name="CategoryTypes" EntityType="AdminService.CategoryTypes">
                     <NavigationPropertyBinding Path="categories" Target="Categories"/>
                 </EntitySet>
-                <EntitySet Name="Tickets" EntityType="UserService.Tickets"/>
             </EntityContainer>
             <EntityType Name="Entries">
                 <Key>
@@ -34,7 +32,7 @@
                 </Key>
                 <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="description" Type="Edm.String"/>
-                <NavigationProperty Name="category" Type="UserService.Categories" Partner="entries">
+                <NavigationProperty Name="category" Type="AdminService.Categories" Partner="entries">
                     <ReferentialConstraint Property="category_ID" ReferencedProperty="ID"/>
                 </NavigationProperty>
                 <Property Name="category_ID" Type="Edm.Guid"/>
@@ -44,23 +42,17 @@
                 <Property Name="isTimer" Type="Edm.Boolean" DefaultValue="false"/>
                 <Property Name="status" Type="Edm.String" DefaultValue="InProgress"/>
             </EntityType>
-            <EntityType Name="Templates">
-                <Key>
-                    <PropertyRef Name="ID"/>
-                </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-            </EntityType>
             <EntityType Name="Categories">
                 <Key>
                     <PropertyRef Name="ID"/>
                 </Key>
                 <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="name" Type="Edm.String" Nullable="false"/>
-                <NavigationProperty Name="CategoryType" Type="UserService.CategoryTypes" Partner="categories">
+                <NavigationProperty Name="CategoryType" Type="AdminService.CategoryTypes" Partner="categories">
                     <ReferentialConstraint Property="CategoryType_ID" ReferencedProperty="ID"/>
                 </NavigationProperty>
                 <Property Name="CategoryType_ID" Type="Edm.Guid"/>
-                <NavigationProperty Name="entries" Type="Collection(UserService.Entries)" Partner="category"/>
+                <NavigationProperty Name="entries" Type="Collection(AdminService.Entries)" Partner="category"/>
             </EntityType>
             <EntityType Name="CategoryTypes">
                 <Key>
@@ -68,18 +60,9 @@
                 </Key>
                 <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="option" Type="Edm.String"/>
-                <NavigationProperty Name="categories" Type="Collection(UserService.Categories)" Partner="CategoryType"/>
+                <NavigationProperty Name="categories" Type="Collection(AdminService.Categories)" Partner="CategoryType"/>
             </EntityType>
-            <EntityType Name="Tickets">
-                <Key>
-                    <PropertyRef Name="ID"/>
-                </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="number" Type="Edm.Int32"/>
-                <Property Name="description" Type="Edm.String"/>
-                <Property Name="project_ID" Type="Edm.Guid"/>
-            </EntityType>
-            <Annotations Target="UserService.Entries/status">
+            <Annotations Target="AdminService.Entries/status">
                 <Annotation Term="Validation.AllowedValues">
                     <Collection>
                         <Record Type="Validation.AllowedValue">
@@ -97,7 +80,7 @@
                     </Collection>
                 </Annotation>
             </Annotations>
-            <Annotations Target="UserService.EntityContainer/Categories">
+            <Annotations Target="AdminService.EntityContainer/CategoryTypes">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record Type="Capabilities.DeleteRestrictionsType">
                         <PropertyValue Property="Deletable" Bool="false"/>
@@ -114,24 +97,7 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="UserService.EntityContainer/CategoryTypes">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record Type="Capabilities.DeleteRestrictionsType">
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record Type="Capabilities.InsertRestrictionsType">
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record Type="Capabilities.UpdateRestrictionsType">
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="UserService.CategoryTypes/option">
+            <Annotations Target="AdminService.CategoryTypes/option">
                 <Annotation Term="Validation.AllowedValues">
                     <Collection>
                         <Record Type="Validation.AllowedValue">
@@ -147,23 +113,6 @@
                             <PropertyValue Property="Value" String="Not-Work"/>
                         </Record>
                     </Collection>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="UserService.EntityContainer/Tickets">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record Type="Capabilities.DeleteRestrictionsType">
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record Type="Capabilities.InsertRestrictionsType">
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record Type="Capabilities.UpdateRestrictionsType">
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
                 </Annotation>
             </Annotations>
         </Schema>

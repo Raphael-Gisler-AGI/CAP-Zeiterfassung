@@ -17,10 +17,14 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-zeiterfassung": "cds watch --open zeiterfassung/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-zeiterfassung": "cds watch --open zeiterfassung/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-admin-zeiterfassung": "cds watch --open admin-zeiterfassung/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
+      "auth": {
+        "kind": "mocked"
+      },
       "db": {
         "kind": "sqlite",
         "credentials": {

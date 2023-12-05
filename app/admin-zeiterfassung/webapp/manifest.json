@@ -1,7 +1,7 @@
 {
   "_version": "1.58.0",
   "sap.app": {
-    "id": "zeiterfassung",
+    "id": "adminzeiterfassung",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,11 +13,11 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:basic",
       "version": "1.11.4",
-      "toolsId": "0d71edaa-07f2-4ddb-92e3-267938f323e9"
+      "toolsId": "60646140-1383-4081-9d73-bf57f154d30b"
     },
     "dataSources": {
       "mainService": {
-        "uri": "/odata/v4/user/",
+        "uri": "/odata/v4/admin/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -66,7 +66,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "zeiterfassung.i18n.i18n"
+          "bundleName": "adminzeiterfassung.i18n.i18n"
         }
       },
       "": {
@@ -80,16 +80,22 @@
         }
       }
     },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "zeiterfassung.view",
+        "viewPath": "adminzeiterfassung.view",
         "controlAggregation": "pages",
         "controlId": "app",
-        "clearControlAggregation": false,
-        "transition": "slide"
+        "clearControlAggregation": false
       },
       "routes": [
         {
@@ -102,13 +108,16 @@
       ],
       "targets": {
         "TargetMain": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
           "viewId": "Main",
           "viewName": "Main"
         }
       }
     },
     "rootView": {
-      "viewName": "zeiterfassung.view.App",
+      "viewName": "adminzeiterfassung.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

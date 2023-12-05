@@ -5,7 +5,7 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("zeiterfassung.controller.App", {
+      return BaseController.extend("adminzeiterfassung.controller.App", {
         onInit: function() {
         }
       });

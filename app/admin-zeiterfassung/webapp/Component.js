@@ -5,12 +5,12 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "zeiterfassung/model/models"
+        "adminzeiterfassung/model/models"
     ],
     function (UIComponent, Device, models) {
         "use strict";
 
-        return UIComponent.extend("zeiterfassung.Component", {
+        return UIComponent.extend("adminzeiterfassung.Component", {
             metadata: {
                 manifest: "json"
             },

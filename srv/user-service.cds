@@ -1,17 +1,15 @@
 using {sap.capire.zeiterfassung as my} from '../db/schema';
 
-service EntriesService @(path: '/browse') {
-    @readonly
-    entity Entries    as
-        select from my.Entries {
-            *,
-            category.name as category
-        }
-        excluding {
-            createdBy,
-            modifiedBy
-        };
+service UserService {
+    entity Entries       as projection on my.Entries;
+    entity Templates     as projection on my.Templates;
 
-    @requires: 'authenticated-user'
-    action createEntry(entry : Entries:ID);
+    @readonly
+    entity Categories    as projection on my.Categories
+
+    @readonly
+    entity CategoryTypes as projection on my.CategoryTypes;
+
+    @readonly
+    entity Tickets       as projection on my.Tickets;
 }
