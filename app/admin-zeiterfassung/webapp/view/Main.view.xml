@@ -1,7 +1,55 @@
-<mvc:View controllerName="adminzeiterfassung.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+<mvc:View
+    controllerName="adminzeiterfassung.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+    <Table
+        itemPress=".onNavProject"
+        items="{/Categories}">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Title
+                    titleStyle="H3"
+                    text="Projects" />
+                <ToolbarSpacer />
+                <Button
+                    press=".onPressCreateProject"
+                    type="Emphasized"
+                    text="Create Project"
+                    icon="sap-icon://add" />
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column>
+                <Text text="Name" />
+            </Column>
+            <Column>
+                <Text text="Customer" />
+            </Column>
+            <Column hAlign="End">
+                <Text text="Actions" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem
+                press=".onNavProject"
+                type="Navigation">
+                <Text text="{name}" />
+                <Text text="{customer/name}" />
+                <Button
+                    press=".onPressProjectAction"
+                    icon="sap-icon://overflow">
+                    <dependents>
+                        <ActionSheet>
+                            <Button
+                                press=".onPressEditProjectAction"
+                                icon="sap-icon://edit" />
+                            <Button
+                                press=".onPressDeleteProjectAction"
+                                icon="sap-icon://delete" />
+                        </ActionSheet>
+                    </dependents>
+                </Button>
+            </ColumnListItem>
+        </items>
+    </Table>
 </mvc:View>

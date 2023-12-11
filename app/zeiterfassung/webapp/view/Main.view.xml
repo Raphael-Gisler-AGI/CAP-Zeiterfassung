@@ -7,10 +7,18 @@
             <Column>
                 <Text text="Description" />
             </Column>
+            <Column>
+                <Text text="Category" />
+            </Column>
+            <Column>
+                <Text text="Time" />
+            </Column>
         </columns>
         <items>
             <ColumnListItem>
                 <Text text="{description}" />
+                <Text text="{category/name}" />
+                <Text text="{startTime} - {endTime}" />
             </ColumnListItem>
         </items>
     </Table>

@@ -1,4 +1,4 @@
-<mvc:View xmlns:uxap="sap.uxap" xmlns:actiontoolbar="sap.ui.mdc.actiontoolbar" xmlns:mdc="sap.ui.mdc"
+<mvc:View
     controllerName="zeiterfassung.controller.App"
     xmlns:f="sap.f"
     xmlns:mvc="sap.ui.core.mvc"
@@ -11,6 +11,7 @@
                 </f:heading>
                 <f:actions>
                     <Button
+                        press=".onPressCreateEntry"
                         type="Emphasized"
                         icon="sap-icon://add"
                         text="Create Entry" />

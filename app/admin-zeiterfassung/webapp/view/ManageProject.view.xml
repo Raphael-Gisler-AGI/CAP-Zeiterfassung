@@ -1,0 +1,37 @@
+<mvc:View
+	controllerName="adminzeiterfassung.controller.ManageProject"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<Page
+		title="Project"
+		floatingFooter="true">
+		<form:SimpleForm>
+			<Label text="Name" />
+			<Input value="{name}" />
+			<Label text="Customer" />
+			<Select
+				forceSelection="false"
+				selectedKey="{customer_ID}"
+				items="{/Customers}">
+				<core:Item
+					key="{ID}"
+					text="{name}" />
+			</Select>
+		</form:SimpleForm>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button
+					press=".onPressDiscard"
+					type="Reject"
+					text="Discard" />
+				<Button
+					press=".onPressSave"
+					type="Accept"
+					text="Save" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -5,7 +5,7 @@ service UserService {
     entity Templates     as projection on my.Templates;
 
     @readonly
-    entity Categories    as projection on my.Categories
+    entity Categories    as projection on my.Categories;
 
     @readonly
     entity CategoryTypes as projection on my.CategoryTypes;
