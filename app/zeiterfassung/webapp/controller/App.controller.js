@@ -1,47 +1,41 @@
-sap.ui.define(["./BaseController", "sap/ui/model/json/JSONModel"], function (
-  BaseController,
-  JSONModel
-) {
+sap.ui.define(["./BaseController"], function (BaseController) {
   "use strict";
 
   return BaseController.extend("zeiterfassung.controller.App", {
-    onInit() {
-      this.getView().setModel(new JSONModel(), "EntryDialog");
-    },
-    onPressCreateEntry() {
-      this._openEntryDialog();
-    },
-    // Dialog
-    async onPressCreateEntryDialog() {
+    async onPressCreateEntry() {
       const entries = this.getModel().bindList("/Entries");
-      const result = entries.create(this.getEntryDialogModel().getData());
+      const result = entries.create();
       this.getView().setBusy(true);
       await result.created();
       this.getView().setBusy(false);
+      this._openEntryDialog(result);
+    },
+
+    // Dialog
+    async onPressCreateEntryDialog() {
+      const context = this._getEntryDialog().getBindingContext();
+      await this.saveEntry(context);
       this._closeEntryDialog();
     },
     onPressCancelEntryDialog() {
+      this._getEntryDialog().getBindingContext().delete();
       this._closeEntryDialog();
     },
-    _openEntryDialog() {
-      this.getEntryDialogModel().setData({
-        description: "",
-        category_ID: "",
-        startTime: new Date(),
-        endTime: new Date(),
-        isAllDay: false,
-        tickets_ID: undefined,
-      });
+
+    _openEntryDialog(context) {
       this.entryDialog ??= this.loadFragment({
         name: "zeiterfassung.fragment.Entry",
       });
       this.entryDialog.then((dialog) => {
+        dialog.bindElement(context.getPath());
         dialog.open();
       });
     },
+    _getEntryDialog() {
+      return this.byId("entryDialog");
+    },
     _closeEntryDialog() {
-      this.getEntryDialogModel().setData({});
-      this.byId("entryDialog").close();
+      this._getEntryDialog().close();
     },
   });
 });

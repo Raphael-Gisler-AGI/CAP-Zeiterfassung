@@ -19,12 +19,12 @@
         <Label text="Description" />
         <TextArea
             required="true"
-            value="{EntryDialog>/description}" />
+            value="{description}" />
         <Label text="Categories" />
         <Select
             required="true"
             forceSelection="false"
-            selectedKey="{EntryDialog>/category_ID}"
+            selectedKey="{category_ID}"
             items="{/Categories}">
             <core:Item
                 key="{ID}"

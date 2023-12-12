@@ -10,11 +10,17 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
     getModel(name) {
       return this.getOwnerComponent().getModel(name);
     },
-    getEntriesModel() {
-      return this.getModel("Entries");
+    _refresh() {
+      this.getModel().refresh();
     },
-    getEntryDialogModel() {
-      return this.getView().getModel("EntryDialog");
+    async saveEntry(context) {
+      await this.getModel()
+        .bindContext(
+          `${context.getPath()}/UserService.draftActivate(...)`,
+          context
+        )
+        .execute();
+      this._refresh();
     },
   });
 });
