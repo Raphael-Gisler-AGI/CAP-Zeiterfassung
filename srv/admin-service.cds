@@ -1,19 +1,19 @@
 using {sap.capire.zeiterfassung as my} from '../db/schema';
 
+@impl: './admin-service.js'
 service AdminService {
     entity Entries       as
         select from my.Entries
         where
             Entries.isSaved;
 
-    @odata.draft.enabled
-    entity Categories    as projection on my.Categories;
+    entity Categories    as projection on my.Categories {
+        *
+    } actions {
+        action saveCategory();
+    };
 
-    action createProject(data : String);
     entity Tickets       as projection on my.Tickets;
-
-    @readonly
-    entity CategoryTypes as projection on my.CategoryTypes;
 
     @readonly
     entity Customers     as projection on my.Customers;

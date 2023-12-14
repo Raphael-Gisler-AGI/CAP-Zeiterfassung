@@ -79,7 +79,6 @@ sap.ui.define(
             if (oEvent === MessageBox.Action.OK) {
               await context.delete();
               this.refresh();
-              this.navToMain();
             }
           },
         });

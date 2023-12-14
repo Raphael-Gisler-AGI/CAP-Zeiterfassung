@@ -49,11 +49,11 @@ entity Entries : cuid {
     isAllDay    : Boolean default false;
     isTimer     : Boolean default false;
     isSaved     : Boolean default false;
-    status      : String enum {
-        InProgress = 'In Progress';
-        Approved;
-        Rejected;
-    } default 'InProgress';
+    status      : Integer enum {
+        Pending = 0;
+        Approved = 1;
+        Rejected = -1;
+    } default 0;
     ticket      : Association to one Tickets;
     employee    : Association to one Employees;
 }
@@ -63,20 +63,16 @@ entity Templates : cuid {}
 entity Categories : cuid {
     name         : String;
     isActive     : Boolean default true;
-    selectedType : Association to one CategoryTypes;
+    type         : String enum {
+        Project;
+        NonProject = 'Non-Project';
+        NotWork    = 'Not-Work';
+    };
     customer     : Association to one Customers;
     to_entries   : Association to many Entries
                        on to_entries.category = $self;
     to_employees : Association to many Employees2Categories
                        on to_employees.category = $self;
-}
-
-entity CategoryTypes : cuid {
-    option : String enum {
-        Project;
-        NonProject = 'Non-Project';
-        NotWork    = 'Not-Work';
-    };
 }
 
 entity Employees2Categories : cuid {

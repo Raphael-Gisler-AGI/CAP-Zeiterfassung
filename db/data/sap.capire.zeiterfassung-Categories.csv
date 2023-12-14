@@ -1,1 +1,4 @@
-name,isActive,selectedType_ID,customer_ID
+name,isActive,type,customer_ID
+BMC App,true,Project,d24c0004-99b2-11ee-b9d1-0242ac120002
+Schulung,true,NonProject,
+Krank,true,NonWork,

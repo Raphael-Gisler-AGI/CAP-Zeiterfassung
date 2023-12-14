@@ -9,8 +9,7 @@ sap.ui.define(["./BaseController"], function (BaseController) {
     },
     _onObjectMatched(oEvent) {
       const id = oEvent.getParameter("arguments").id;
-      this.getView().bindElement(`/Categories(ID=${id},IsActiveEntity=true)`);
-      // this.getView().bindElement();
+      this.getView().bindElement(`/Categories(ID=${id})`);
     },
     onPressEditProject(oEvent) {
       this.editProject(oEvent.getSource().getBindingContext());

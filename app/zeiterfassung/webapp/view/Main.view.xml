@@ -2,7 +2,16 @@
     controllerName="zeiterfassung.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Table items="{/Entries}">
+    <Table
+        items="{
+        path: '/Entries',
+        sorter : {
+            path : 'startTime',
+            descending: true,
+            group : '.formatter.getEntryGroup'
+        }
+
+    }">
         <columns>
             <Column>
                 <Text text="Description" />
@@ -13,12 +22,31 @@
             <Column>
                 <Text text="Time" />
             </Column>
+            <Column hAlign="End">
+                <Text text="Edit" />
+            </Column>
+            <Column hAlign="End">
+                <Text text="Delete" />
+            </Column>
         </columns>
         <items>
             <ColumnListItem>
                 <Text text="{description}" />
                 <Text text="{category/name}" />
-                <Text text="{startTime} - {endTime}" />
+                <Text
+                    text="{
+                        parts: [
+                            'startTime',
+                            'endTime'
+                        ],
+                        formatter: '.formatter.getEntryTime'
+                    }" />
+                <Button
+                    press=".onPressEdit"
+                    icon="sap-icon://edit" />
+                <Button
+                    press=".onPressDelete"
+                    icon="sap-icon://delete" />
             </ColumnListItem>
         </items>
     </Table>

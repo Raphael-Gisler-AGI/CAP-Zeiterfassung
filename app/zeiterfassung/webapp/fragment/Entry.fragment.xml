@@ -2,12 +2,13 @@
     id="entryDialog"
     xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    title="Entry">
     <beginButton>
         <Button
-            press=".onPressCreateEntryDialog"
+            press=".onPressSaveEntryDialog"
             type="Emphasized"
-            text="Create" />
+            text="Save" />
     </beginButton>
     <endButton>
         <Button
@@ -30,5 +31,15 @@
                 key="{ID}"
                 text="{name}" />
         </Select>
+        <Label text="Start Time" />
+        <DateTimePicker
+            dateValue="{startTime}"
+            minutesStep="15"
+            required="true" />
+        <Label text="End Time" />
+        <DateTimePicker
+            dateValue="{endTime}"
+            minutesStep="15"
+            required="true" />
     </form:SimpleForm>
 </Dialog>

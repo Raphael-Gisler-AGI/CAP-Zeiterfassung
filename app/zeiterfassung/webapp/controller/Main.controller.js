@@ -1,9 +1,12 @@
-sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-],
-    function (Controller) {
-        "use strict";
+sap.ui.define(["./BaseController"], function (BaseController) {
+  "use strict";
 
-        return Controller.extend("zeiterfassung.controller.Main", {
-        });
-    });
+  return BaseController.extend("zeiterfassung.controller.Main", {
+    onPressEdit(oEvent) {
+      this.openEntryDialog(oEvent.getSource().getBindingContext());
+    },
+    onPressDelete(oEvent) {
+      oEvent.getSource().getBindingContext().delete();
+    },
+  });
+});

@@ -10,7 +10,7 @@ sap.ui.define(["./BaseController"], function (BaseController) {
     _onObjectMatched(oEvent) {
       const { id } = oEvent.getParameter("arguments");
       this.getView().bindObject({
-        path: `/Categories(ID=${id},IsActiveEntity=false)`,
+        path: `/Categories(ID=${id})`,
         events: {
           dataReceived: (oEvent) => {
             if (oEvent.getParameter("error")) {
@@ -22,9 +22,12 @@ sap.ui.define(["./BaseController"], function (BaseController) {
     },
     onPressDiscard() {
       this.deleteProject(this.getView().getBindingContext());
+      this.navToMain();
     },
     onPressSave() {
-      this.saveProject(this.getView().getBindingContext());
+      // this.saveProject(this.getView().getBindingContext());
+      this.refresh();
+      this.navToMain();
     },
   });
 });
