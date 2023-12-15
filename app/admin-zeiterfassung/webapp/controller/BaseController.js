@@ -18,12 +18,13 @@ sap.ui.define(
       getModel(name = undefined) {
         return this.getOwnerComponent().getModel(name);
       },
-      refresh() {
+      _refresh() {
         this.getModel().refresh();
       },
       getText(text) {
         return this.getModel("i18n").getResourceBundle().getText(text);
       },
+
       // Navigation
       getRouter() {
         return this.getOwnerComponent().getRouter();
@@ -43,34 +44,19 @@ sap.ui.define(
         this.getRouter().navTo("RouteProject", { id: id });
       },
       navToNotFound() {
-        this.getRouter().navTo("RouteNotFound", {}, {}, true)
+        this.getRouter().navTo("RouteNotFound", {}, {}, true);
       },
       /**
        *
-       * @param {string} [id]
+       * @param {string} id
        */
-      navToManageProject(id = undefined) {
+      navToManageProject(id) {
         this.getRouter().navTo("RouteManageProject", { id: id });
       },
-      async saveProject(context) {
-        const id = context.getProperty("ID");
-        await this.getModel()
-          .bindContext(
-            `/Categories(ID=${id},IsActiveEntity=false)/AdminService.draftActivate(...)`,
-            context
-          )
-          .execute();
-        this.navToProject(id);
-      },
-      async editProject(context) {
-        const id = context.getProperty("ID");
-        await this.getModel()
-          .bindContext(
-            `/Categories(ID=${id},IsActiveEntity=true)/AdminService.draftEdit(...)`,
-            context
-          )
-          .execute();
-        this.navToManageProject(id);
+
+      async saveProject(batchName) {
+        await this.getModel().submitBatch(batchName);
+        this._refresh();
       },
       async deleteProject(context) {
         MessageBox.confirm(this.getText("projectDeleteMessage"), {
@@ -78,10 +64,15 @@ sap.ui.define(
           onClose: async (oEvent) => {
             if (oEvent === MessageBox.Action.OK) {
               await context.delete();
-              this.refresh();
+              this._refresh();
+              this.navToMain();
             }
           },
         });
+      },
+
+      getContext() {
+        return this.getView().getBindingContext();
       },
     });
   }

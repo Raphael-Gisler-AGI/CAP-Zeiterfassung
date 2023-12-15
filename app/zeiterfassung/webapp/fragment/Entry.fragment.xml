@@ -41,5 +41,14 @@
             dateValue="{endTime}"
             minutesStep="15"
             required="true" />
+        <Label text="Ticket" />
+        <Select
+            forceSelection="false"
+            selectedKey="{ticket_ID}"
+            items="{/Tickets}">
+            <core:Item
+                key="{ID}"
+                text="#{number} {description}" />
+        </Select>
     </form:SimpleForm>
 </Dialog>

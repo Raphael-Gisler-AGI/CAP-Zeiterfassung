@@ -12,7 +12,7 @@
 					<m:Bar>
 						<m:contentLeft>
 							<m:Button
-							 	press=".navBack"
+							 	press=".navToMain"
 								icon="sap-icon://nav-back" />
 						</m:contentLeft>
 					</m:Bar>
@@ -33,32 +33,5 @@
 				</actions>
 			</ObjectPageHeader>
 		</headerTitle>
-		<sections>
-			<ObjectPageSection
-				titleUppercase="false"
-				title="Team Members">
-				<ObjectPageSubSection>
-					<blocks>
-						<m:Table
-							items="{to_employees}">
-							<m:columns>
-								<m:Column>
-									<m:Text text="Last Name" />
-								</m:Column>
-								<m:Column>
-									<m:Text text="First Name" />
-								</m:Column>
-							</m:columns>
-							<m:items>
-								<m:ColumnListItem>
-									<m:Text text="{employee/firstname}" />
-									<m:Text text="{employee/lastname}" />
-								</m:ColumnListItem>
-							</m:items>
-						</m:Table>
-					</blocks>
-				</ObjectPageSubSection>
-			</ObjectPageSection>
-		</sections>
 	</ObjectPageLayout>
 </mvc:View>

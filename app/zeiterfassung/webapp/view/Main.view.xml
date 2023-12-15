@@ -14,13 +14,13 @@
     }">
         <columns>
             <Column>
+                <Text text="Time" />
+            </Column>
+            <Column>
                 <Text text="Description" />
             </Column>
             <Column>
                 <Text text="Category" />
-            </Column>
-            <Column>
-                <Text text="Time" />
             </Column>
             <Column hAlign="End">
                 <Text text="Edit" />
@@ -30,9 +30,10 @@
             </Column>
         </columns>
         <items>
-            <ColumnListItem>
-                <Text text="{description}" />
-                <Text text="{category/name}" />
+            <ColumnListItem highlight="{
+                path: 'status',
+                formatter: '.formatter.getEntryStatus'
+            }">
                 <Text
                     text="{
                         parts: [
@@ -41,6 +42,8 @@
                         ],
                         formatter: '.formatter.getEntryTime'
                     }" />
+                <Text text="{description}" />
+                <Text text="{category/name}" />
                 <Button
                     press=".onPressEdit"
                     icon="sap-icon://edit" />

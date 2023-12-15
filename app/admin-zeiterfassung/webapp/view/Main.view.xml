@@ -25,9 +25,6 @@
             <Column>
                 <Text text="Customer" />
             </Column>
-            <Column hAlign="End">
-                <Text text="Actions" />
-            </Column>
         </columns>
         <items>
             <ColumnListItem
@@ -35,20 +32,6 @@
                 type="Navigation">
                 <Text text="{name}" />
                 <Text text="{customer/name}" />
-                <Button
-                    press=".onPressProjectAction"
-                    icon="sap-icon://overflow">
-                    <dependents>
-                        <ActionSheet>
-                            <Button
-                                press=".onPressEditProjectAction"
-                                icon="sap-icon://edit" />
-                            <Button
-                                press=".onPressDeleteProjectAction"
-                                icon="sap-icon://delete" />
-                        </ActionSheet>
-                    </dependents>
-                </Button>
             </ColumnListItem>
         </items>
     </Table>

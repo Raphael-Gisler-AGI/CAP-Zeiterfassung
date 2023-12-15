@@ -14,15 +14,5 @@ sap.ui.define(["./BaseController"], function (BaseController) {
         id: oEvent.getSource().getBindingContext().getProperty("ID"),
       });
     },
-    onPressProjectAction(oEvent) {
-      const source = oEvent.getSource();
-      source.getDependents()[0].openBy(source);
-    },
-    onPressEditProjectAction(oEvent) {
-      this.editProject(oEvent.getSource().getBindingContext());
-    },
-    onPressDeleteProjectAction(oEvent) {
-      this.deleteProject(oEvent.getSource().getBindingContext());
-    },
   });
 });

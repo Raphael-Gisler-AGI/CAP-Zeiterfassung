@@ -11,11 +11,12 @@ sap.ui.define(["./BaseController"], function (BaseController) {
       const id = oEvent.getParameter("arguments").id;
       this.getView().bindElement(`/Categories(ID=${id})`);
     },
-    onPressEditProject(oEvent) {
-      this.editProject(oEvent.getSource().getBindingContext());
+    onPressEditProject() {
+      const id = this.getContext().getProperty("ID");
+      this.navToManageProject(id);
     },
-    onPressDeleteProject(oEvent) {
-      this.deleteProject(oEvent.getSource().getBindingContext());
+    onPressDeleteProject() {
+      this.deleteProject(this.getContext());
     },
   });
 });

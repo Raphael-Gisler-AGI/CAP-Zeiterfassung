@@ -19,6 +19,14 @@
 					key="{ID}"
 					text="{name}" />
 			</Select>
+			<Label text="Employees" />
+			<MultiComboBox
+				selectedKeys="{to_employees}"
+				items="{/Employees}">
+				<core:Item
+				 	key="{ID}"
+					text="{firstname} {lastname}" />
+			</MultiComboBox>
 		</form:SimpleForm>
 		<footer>
 			<OverflowToolbar>

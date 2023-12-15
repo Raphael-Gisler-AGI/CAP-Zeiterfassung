@@ -11,6 +11,7 @@ sap.ui.define(["./BaseController"], function (BaseController) {
       const { id } = oEvent.getParameter("arguments");
       this.getView().bindObject({
         path: `/Categories(ID=${id})`,
+        parameters: { $$updateGroupId: "projectGroup" },
         events: {
           dataReceived: (oEvent) => {
             if (oEvent.getParameter("error")) {
@@ -21,13 +22,13 @@ sap.ui.define(["./BaseController"], function (BaseController) {
       });
     },
     onPressDiscard() {
-      this.deleteProject(this.getView().getBindingContext());
+      this.deleteProject(this.getContext());
       this.navToMain();
     },
-    onPressSave() {
-      // this.saveProject(this.getView().getBindingContext());
-      this.refresh();
-      this.navToMain();
+    async onPressSave() {
+      const id = this.getContext().getProperty("ID")
+      await this.saveProject("projectGroup");
+      this.navToProject(id);
     },
   });
 });

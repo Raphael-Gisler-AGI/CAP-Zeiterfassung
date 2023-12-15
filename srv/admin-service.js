@@ -3,10 +3,7 @@ const cds = require("@sap/cds");
 class AdminService extends cds.ApplicationService {
   async init() {
     const { Categories } = this.entities;
-    // this.on("UPDATE", Categories, () => {});
-    this.on("saveCategory", async (req) => {
-      const etse = "afds";
-    });
+    this.before("UPDATE", Categories, (req) => {});
     return super.init();
   }
 }
