@@ -95,15 +95,22 @@
         {
           "name": "RouteMain",
           "pattern": ":?query:",
-          "target": [
-            "TargetMain"
-          ]
+          "target": "TargetMain"
+        },
+        {
+          "name": "RouteCalendar",
+          "pattern": "calendar",
+          "target": "TargetCalendar"
         }
       ],
       "targets": {
         "TargetMain": {
           "viewId": "Main",
           "viewName": "Main"
+        },
+        "TargetCalendar": {
+          "viewId": "Calendar",
+          "viewName": "Calendar"
         }
       }
     },

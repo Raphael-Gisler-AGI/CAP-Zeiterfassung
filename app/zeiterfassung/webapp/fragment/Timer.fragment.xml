@@ -1,0 +1,41 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Popover
+        xmlns="sap.m"
+        title="00:00:00"
+        titleAlignment="Center"
+        placement="Bottom">
+        <content>
+            <VBox>
+                <TextArea
+                    value="{description}"
+                    placeholder="Description" />
+                <Select
+                    selectedKey="{category_ID}"
+                    forceSelection="false"
+                    width="100%"
+                    items="{/Categories}">
+                    <core:Item
+                        key="{ID}"
+                        text="{name}" />
+                </Select>
+            </VBox>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    press=".onPressTimerToggle"
+                    icon="sap-icon://media-play" />
+                <ToolbarSeparator />
+                <Button
+                    press=".onPressTimerReset"
+                    icon="sap-icon://restart" />
+                <ToolbarSpacer />
+            </OverflowToolbar>
+        </footer>
+        <subHeader>
+        </subHeader>
+    </Popover>
+</core:FragmentDefinition>

@@ -43,18 +43,24 @@ entity Tickets : cuid {
 
 entity Entries : cuid {
     description : String;
-    category    : Association to one Categories;
     startTime   : DateTime;
     endTime     : DateTime;
     isAllDay    : Boolean default false;
-    isTimer     : Boolean default false;
     isSaved     : Boolean default false;
     status      : Integer enum {
-        Pending = 0;
+        Pending  = 0;
         Approved = 1;
         Rejected = -1;
     } default 0;
+    category    : Association to one Categories;
     ticket      : Association to one Tickets;
+    employee    : Association to one Employees;
+}
+
+entity Timer : cuid {
+    startTime   : DateTime;
+    description : String;
+    category    : Association to one Categories;
     employee    : Association to one Employees;
 }
 

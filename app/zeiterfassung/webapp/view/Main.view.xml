@@ -2,16 +2,7 @@
     controllerName="zeiterfassung.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Table
-        items="{
-        path: '/Entries',
-        sorter : {
-            path : 'startTime',
-            descending: true,
-            group : '.formatter.getEntryGroup'
-        }
-
-    }">
+    <Table items="{/Entries}">
         <columns>
             <Column>
                 <Text text="Time" />
@@ -30,10 +21,7 @@
             </Column>
         </columns>
         <items>
-            <ColumnListItem highlight="{
-                path: 'status',
-                formatter: '.formatter.getEntryStatus'
-            }">
+            <ColumnListItem>
                 <Text
                     text="{
                         parts: [

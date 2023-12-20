@@ -1,25 +1,48 @@
 <mvc:View
     controllerName="zeiterfassung.controller.App"
-    xmlns:f="sap.f"
+    xmlns:tnt="sap.tnt"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <f:DynamicPage>
-        <f:title>
-            <f:DynamicPageTitle>
-                <f:heading>
-                    <Title text="{i18n>title}" />
-                </f:heading>
-                <f:actions>
-                    <Button
-                        press=".onPressCreateEntry"
-                        type="Emphasized"
-                        icon="sap-icon://add"
-                        text="Create Entry" />
-                </f:actions>
-            </f:DynamicPageTitle>
-        </f:title>
-        <f:content>
+    <tnt:ToolPage>
+        <tnt:header>
+            <tnt:ToolHeader>
+                <Title text="{i18n>title}" />
+                <ToolbarSpacer />
+                <Button
+                    press=".onPressCreateEntry"
+                    type="Emphasized"
+                    icon="sap-icon://add"
+                    text="Create Entry" />
+                <ToolbarSeparator />
+                <Button
+                    press=".onPressDraftButton"
+                    type="Ghost"
+                    text="Drafts" />
+                <ToolbarSeparator />
+                <Button
+                    press=".onPressTimer"
+                    type="Ghost"
+                    icon="sap-icon://fob-watch" />
+            </tnt:ToolHeader>
+        </tnt:header>
+        <tnt:sideContent>
+            <tnt:SideNavigation>
+                <tnt:NavigationList
+                    id="sideNavigation"
+                    itemSelect=".onSelectNavigate">
+                    <tnt:NavigationListItem
+                        key="RouteMain"
+                        icon="sap-icon://table-view"
+                        text="Main" />
+                    <tnt:NavigationListItem
+                        key="RouteCalendar"
+                        icon="sap-icon://calendar"
+                        text="Calendar" />
+                </tnt:NavigationList>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+        <tnt:mainContents>
             <App id="app" />
-        </f:content>
-    </f:DynamicPage>
+        </tnt:mainContents>
+    </tnt:ToolPage>
 </mvc:View>
