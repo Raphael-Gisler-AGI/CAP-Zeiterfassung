@@ -1,7 +1,6 @@
 using {sap.capire.zeiterfassung as my} from '../db/schema';
 
 service UserService {
-    @odata.draft.enabled
     entity Entries    as projection on my.Entries
                          order by
                              startTime desc;

@@ -1,20 +1,27 @@
 <mvc:View
-	controllerName="zeiterfassung.controller.Calendar"
+    controllerName="zeiterfassung.controller.Calendar"
     xmlns:unified="sap.ui.unified"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m">
-    <SinglePlanningCalendar
-        enableAppointmentsCreate="true"
-        enableAppointmentsDragAndDrop="true"
-        enableAppointmentsResize="true"
-        appointmentResize=".onResize"
-        appointments="{/Entries}">
-        <appointments>
-            <unified:CalendarAppointment
-                title="{category/name}"
-                description="{description}"
-                startDate="{startTime}"
-                endDate="{endTime}" />
-        </appointments>
-    </SinglePlanningCalendar>
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <ScrollContainer
+        vertical="true"
+        height="100%">
+        <SinglePlanningCalendar
+            enableAppointmentsCreate="true"
+            enableAppointmentsDragAndDrop="true"
+            enableAppointmentsResize="true"
+            appointmentResize=".onResize"
+            appointmentDrop=".onDrop"
+            appointmentCreate=".onCreate"
+            appointmentSelect=".onSelect"
+            appointments="{/Entries}">
+            <appointments>
+                <unified:CalendarAppointment
+                    title="{category/name}"
+                    text="{description}"
+                    startDate="{startTime}"
+                    endDate="{endTime}" />
+            </appointments>
+        </SinglePlanningCalendar>
+    </ScrollContainer>
 </mvc:View>

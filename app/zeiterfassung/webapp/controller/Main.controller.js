@@ -4,8 +4,7 @@ sap.ui.define(["./BaseController"], function (BaseController) {
   return BaseController.extend("zeiterfassung.controller.Main", {
     async onPressEdit(oEvent) {
       const entry = oEvent.getSource().getBindingContext();
-      const draftEntry = await this.editEntry(entry);
-      this.openEntryDialog(draftEntry);
+      this.openEntryDialog(entry, true);
     },
     onPressDelete(oEvent) {
       const entry = oEvent.getSource().getBindingContext();
