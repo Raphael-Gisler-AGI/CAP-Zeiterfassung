@@ -1,7 +1,5 @@
-using {
-    cuid,
-    sap
-} from '@sap/cds/common';
+using {cuid} from '@sap/cds/common';
+using {API_PROJECT_V3 as api} from '../srv/external/API_PROJECT_V3';
 
 namespace sap.capire.zeiterfassung;
 
@@ -85,3 +83,16 @@ entity Employees2Categories : cuid {
     employee : Association to one Employees;
     category : Association to one Categories;
 }
+
+
+entity WBSElements as
+    projection on api.WBSElement {
+        key WBSElementExternalID as ID,
+            WBSDescription       as description
+    }
+
+entity Projects    as
+    projection on api.Project {
+        key ProjectExternalID  as ID,
+            ProjectDescription as description
+    }

@@ -1,0 +1,22 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:macros="sap.fe.macros"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.f"
+	controllerName="userzeiterfassung.ext.main.Main">
+	<macros:FilterBar
+		id="FilterBar"
+		metaPath="@com.sap.vocabularies.UI.v1.SelectionFields"
+		contextPath="/Entries"
+		liveMode="true"
+		search=".handlers.onFiltersChanged"
+		filterChanged=".handlers.onFiltersChanged" />
+	<macros:Table
+		id="LineItemTable"
+		metaPath="@com.sap.vocabularies.UI.v1.LineItem"
+		contextPath="/Entries"
+		filterBar="FilterBar"
+		readOnly="true" />
+</mvc:View>

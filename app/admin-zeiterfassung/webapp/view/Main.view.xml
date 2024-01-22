@@ -4,7 +4,7 @@
     xmlns="sap.m">
     <Table
         itemPress=".onNavProject"
-        items="{/Categories}">
+        items="{/Projects}">
         <headerToolbar>
             <OverflowToolbar>
                 <Title
@@ -30,7 +30,7 @@
             <ColumnListItem
                 press=".onNavProject"
                 type="Navigation">
-                <Text text="{name}" />
+                <Text text="{description}" />
                 <Text text="{customer/name}" />
             </ColumnListItem>
         </items>

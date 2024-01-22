@@ -1,7 +1,12 @@
 <mvc:View
     controllerName="zeiterfassung.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:macros="sap.fe.macros"
     xmlns="sap.m">
+    <macros:Table
+        id="LineItemTable"
+        metaPath="/Entries/@com.sap.vocabularies.UI.v1.LineItem"
+        readOnly="true"  />
     <Table items="{/Entries}">
         <columns>
             <Column>

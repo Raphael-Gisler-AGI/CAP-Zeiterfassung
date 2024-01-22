@@ -16,4 +16,10 @@ service AdminService {
 
     @readonly
     entity Employees  as projection on my.Employees;
+
+    @readonly
+    entity WBSElements as projection on my.WBSElements;
+
+    @readonly
+    entity Projects as projection on my.Projects;
 }

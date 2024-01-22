@@ -1,3 +1,5 @@
+.env
+
 # CAP cap-zeiterfassung
 _out
 *.db

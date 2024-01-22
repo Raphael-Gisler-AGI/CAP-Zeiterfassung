@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="UserService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Entries" EntityType="UserService.Entries">
+                    <NavigationPropertyBinding Path="category" Target="Categories"/>
+                    <NavigationPropertyBinding Path="ticket" Target="Tickets"/>
+                </EntitySet>
+                <EntitySet Name="Templates" EntityType="UserService.Templates"/>
+                <EntitySet Name="Categories" EntityType="UserService.Categories">
+                    <NavigationPropertyBinding Path="to_entries" Target="Entries"/>
+                    <NavigationPropertyBinding Path="to_employees" Target="Employees2Categories"/>
+                </EntitySet>
+                <EntitySet Name="Tickets" EntityType="UserService.Tickets">
+                    <NavigationPropertyBinding Path="to_entries" Target="Entries"/>
+                </EntitySet>
+                <EntitySet Name="Employees2Categories" EntityType="UserService.Employees2Categories">
+                    <NavigationPropertyBinding Path="category" Target="Categories"/>
+                </EntitySet>
+                <FunctionImport Name="getEntriesDrafts" Function="UserService.getEntriesDrafts" EntitySet="Entries"/>
+            </EntityContainer>
+            <EntityType Name="Entries">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="startTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="endTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="isAllDay" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="isSaved" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="status" Type="Edm.Int32" DefaultValue="0"/>
+                <NavigationProperty Name="category" Type="UserService.Categories" Partner="to_entries">
+                    <ReferentialConstraint Property="category_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="category_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="ticket" Type="UserService.Tickets" Partner="to_entries">
+                    <ReferentialConstraint Property="ticket_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="ticket_ID" Type="Edm.Guid"/>
+                <Property Name="employee_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Templates">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Categories">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="isActive" Type="Edm.Boolean" DefaultValue="true"/>
+                <Property Name="type" Type="Edm.String"/>
+                <Property Name="customer_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="to_entries" Type="Collection(UserService.Entries)" Partner="category"/>
+                <NavigationProperty Name="to_employees" Type="Collection(UserService.Employees2Categories)" Partner="category"/>
+            </EntityType>
+            <EntityType Name="Tickets">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="isCompleted" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="number" Type="Edm.Int32"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="customer_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="to_entries" Type="Collection(UserService.Entries)" Partner="ticket"/>
+            </EntityType>
+            <EntityType Name="Employees2Categories">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="employee_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="category" Type="UserService.Categories" Partner="to_employees">
+                    <ReferentialConstraint Property="category_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="category_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <Function Name="getEntriesDrafts" IsBound="false" IsComposable="false">
+                <ReturnType Type="Collection(UserService.Entries)" Nullable="false"/>
+            </Function>
+            <Annotations Target="UserService.Entries/status">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Pending"/>
+                            <PropertyValue Property="Value" Int="0"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Approved"/>
+                            <PropertyValue Property="Value" Int="1"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Rejected"/>
+                            <PropertyValue Property="Value" Int="-1"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="UserService.EntityContainer/Categories">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="UserService.Categories/type">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Project"/>
+                            <PropertyValue Property="Value" String="Project"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="NonProject"/>
+                            <PropertyValue Property="Value" String="Non-Project"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="NotWork"/>
+                            <PropertyValue Property="Value" String="Not-Work"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="UserService.EntityContainer/Tickets">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
