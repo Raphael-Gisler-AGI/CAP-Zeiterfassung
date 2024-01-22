@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:tnt="sap.tnt"
-    controllerName="userzeiterfassung.ext.main.Navigation">
+    controllerName="userzeiterfassung.ext.main.controller.Navigation">
     <tnt:ToolPage>
         <tnt:header>
             <tnt:ToolHeader>

@@ -5,7 +5,7 @@
 	xmlns:macros="sap.fe.macros"
 	xmlns:html="http://www.w3.org/1999/xhtml"
 	xmlns:f="sap.f"
-	controllerName="userzeiterfassung.ext.main.Main">
+	controllerName="userzeiterfassung.ext.main.controller.Main">
 	<macros:FilterBar
 		id="FilterBar"
 		metaPath="@com.sap.vocabularies.UI.v1.SelectionFields"

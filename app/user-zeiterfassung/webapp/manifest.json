@@ -84,7 +84,7 @@
       "css": []
     },
     "rootView": {
-      "viewName": "userzeiterfassung.ext.main.Root"
+      "viewName": "userzeiterfassung.ext.main.view.Root"
     },
     "routing": {
       "config": {
@@ -109,7 +109,7 @@
           "name": "sap.fe.core.fpm",
           "options": {
             "settings": {
-              "viewName": "userzeiterfassung.ext.main.Main",
+              "viewName": "userzeiterfassung.ext.main.view.Main",
               "contextPath": "/Entries"
             }
           }
@@ -120,7 +120,7 @@
           "name": "sap.fe.core.fpm",
           "options": {
             "settings": {
-              "viewName": "userzeiterfassung.ext.main.Calendar",
+              "viewName": "userzeiterfassung.ext.main.view.Calendar",
               "contextPath": "/Entries"
             }
           }
