@@ -1,24 +1,13 @@
 <mvc:View
-    id="myRootView"
-    xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc"
+    id="appView"
+	controllerName="userzeiterfassung.ext.main.controller.Root"
     xmlns:tnt="sap.tnt"
-    controllerName="userzeiterfassung.ext.main.controller.Navigation">
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
     <tnt:ToolPage>
         <tnt:header>
             <tnt:ToolHeader>
                 <Title text="{i18n>appTitle}" />
-                <ToolbarSpacer />
-                <Button
-                    press=".onPressCreateEntry"
-                    type="Emphasized"
-                    icon="sap-icon://add"
-                    text="Create Entry" />
-                <ToolbarSeparator />
-                <Button
-                    press=".onPressTimer"
-                    type="Ghost"
-                    icon="sap-icon://fob-watch" />
             </tnt:ToolHeader>
         </tnt:header>
         <tnt:sideContent>
@@ -38,7 +27,9 @@
             </tnt:SideNavigation>
         </tnt:sideContent>
         <tnt:mainContents>
-            <NavContainer id="appContent" autoFocus="false" />
+		    <NavContainer
+                id="myNavContainer"
+                autoFocus="false" />
         </tnt:mainContents>
     </tnt:ToolPage>
 </mvc:View>

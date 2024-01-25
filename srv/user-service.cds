@@ -8,10 +8,8 @@ service UserService {
     entity Templates  as projection on my.Templates;
 
     @readonly
-    entity Categories as projection on my.Categories;
+    entity Projects   as projection on my.Projects;
 
     @readonly
     entity Tickets    as projection on my.Tickets;
-
-    function getEntriesDrafts() returns array of Entries;
 }

@@ -43,6 +43,8 @@
   },
   "sapux": [
     "app/user-zeiterfassung",
+    "app/user-zeiterfassung",
+    "app/user-zeiterfassung",
     "app/user-zeiterfassung"
   ]
 }

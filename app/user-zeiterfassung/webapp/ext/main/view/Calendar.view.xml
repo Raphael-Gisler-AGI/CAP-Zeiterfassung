@@ -1,10 +1,9 @@
-<mvc:XMLView xmlns:unified="sap.ui.unified"
-    xmlns="sap.m"
+<mvc:View
+    controllerName="userzeiterfassung.ext.main.controller.Calendar"
     xmlns:mvc="sap.ui.core.mvc"
-	controllerName="userzeiterfassung.ext.main.controller.Calendar">
-    <ScrollContainer
-        vertical="true"
-        height="100%">
+    xmlns:unified="sap.ui.unified"
+    xmlns="sap.m">
+    <ScrollContainer vertical="true" height="100%">
         <SinglePlanningCalendar
             enableAppointmentsCreate="true"
             enableAppointmentsDragAndDrop="true"
@@ -15,18 +14,17 @@
             appointmentSelect=".onSelect"
             appointments="{/Entries}">
             <views>
-				<SinglePlanningCalendarWeekView key="WeekView" title="Week" />
-				<SinglePlanningCalendarMonthView key="MonthView" title="Month" />
-				<SinglePlanningCalendarDayView key="DayView" title="Day" />
-			</views>
+                <SinglePlanningCalendarWeekView key="WeekView" title="Week"/>
+                <SinglePlanningCalendarMonthView key="MonthView" title="Month"/>
+                <SinglePlanningCalendarDayView key="DayView" title="Day"/>
+            </views>
             <appointments>
                 <unified:CalendarAppointment
-                    title="{category/name}"
+                    title="{to_project/description}"
                     text="{description}"
                     startDate="{startTime}"
-                    endDate="{endTime}" />
+                    endDate="{endTime}"/>
             </appointments>
         </SinglePlanningCalendar>
     </ScrollContainer>
-
-</mvc:XMLView>
+</mvc:View>

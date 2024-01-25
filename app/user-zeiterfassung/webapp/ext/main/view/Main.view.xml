@@ -1,22 +1,34 @@
 <mvc:View
-	xmlns:core="sap.ui.core"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	xmlns:macros="sap.fe.macros"
-	xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:f="sap.f"
-	controllerName="userzeiterfassung.ext.main.controller.Main">
-	<macros:FilterBar
-		id="FilterBar"
-		metaPath="@com.sap.vocabularies.UI.v1.SelectionFields"
-		contextPath="/Entries"
-		liveMode="true"
-		search=".handlers.onFiltersChanged"
-		filterChanged=".handlers.onFiltersChanged" />
-	<macros:Table
-		id="LineItemTable"
-		metaPath="@com.sap.vocabularies.UI.v1.LineItem"
-		contextPath="/Entries"
-		filterBar="FilterBar"
-		readOnly="true" />
+    controllerName="userzeiterfassung.ext.main.controller.Main"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:macros="sap.fe.macros"
+    xmlns:macrosTable="sap.fe.macros.table">
+    <macros:FilterBar
+        id="FilterBar"
+        metaPath="@com.sap.vocabularies.UI.v1.SelectionFields"
+        contextPath="/Entries"
+        liveMode="true" />
+    <macros:Table
+        id="LineItemTable"
+        metaPath="@com.sap.vocabularies.UI.v1.LineItem"
+        contextPath="/Entries"
+        selectionMode="ForceMulti"
+        filterBar="FilterBar"
+        header="Entries">
+        <macros:actions>
+            <macrosTable:Action
+                key="createAction"
+                text="Create"
+                press=".onPressCreateEntry"
+                placement="After"
+                requiresSelection="false" />
+            <macrosTable:Action
+                key="deleteAction"
+                text="Delete"
+                press=".onPressDeleteEntries"
+                placement="After"
+                requiresSelection="false" />
+        </macros:actions>
+    </macros:Table>
 </mvc:View>

@@ -11,32 +11,31 @@ namespace sap.capire.zeiterfassung;
 // Leistungsarten - activ / inactive
 // Zeiten / Timer
 
-entity Employees : cuid {
-    firstname     : String;
-    lastname      : String;
-    email         : String;
-    isAdmin       : Boolean default false;
-    to_categories : Composition of many Employees2Categories
-                        on to_categories.employee = $self;
-    to_entries    : Association to many Entries
-                        on to_entries.employee = $self;
-}
+// entity Employees : cuid {
+//     firstname     : String;
+//     lastname      : String;
+//     email         : String;
+//     isAdmin       : Boolean default false;
+//     to_categories : Composition of many Employees2Categories
+//                         on to_categories.employee = $self;
+//     to_entries    : Association to many Entries
+//                         on to_entries.employee = $self;
+// }
 
-entity Customers : cuid {
-    name          : String;
-    to_tickets    : Association to many Tickets
-                        on to_tickets.customer = $self;
-    to_categories : Association to many Categories
-                        on to_categories.customer = $self;
-}
+// entity Customers : cuid {
+//     name          : String;
+//     to_tickets    : Association to many Tickets
+//                         on to_tickets.customer = $self;
+//     to_categories : Association to many Categories
+//                         on to_categories.customer = $self;
+// }
 
 entity Tickets : cuid {
     isCompleted : Boolean default false;
     number      : Integer;
     description : String;
-    customer    : Association to one Customers;
     to_entries  : Association to many Entries
-                      on to_entries.ticket = $self;
+                      on to_entries.to_ticket = $self;
 }
 
 entity Entries : cuid {
@@ -50,39 +49,36 @@ entity Entries : cuid {
         Approved = 1;
         Rejected = -1;
     } default 0;
-    category    : Association to one Categories;
-    ticket      : Association to one Tickets;
-    employee    : Association to one Employees;
+    to_project  : Association to one Projects;
+    to_ticket   : Association to one Tickets;
 }
 
 entity Timer : cuid {
     startTime   : DateTime;
     description : String;
-    category    : Association to one Categories;
-    employee    : Association to one Employees;
 }
 
 entity Templates : cuid {}
 
-entity Categories : cuid {
-    name         : String;
-    isActive     : Boolean default true;
-    type         : String enum {
-        Project;
-        NonProject = 'Non-Project';
-        NotWork    = 'Not-Work';
-    };
-    customer     : Association to one Customers;
-    to_entries   : Association to many Entries
-                       on to_entries.category = $self;
-    to_employees : Association to many Employees2Categories
-                       on to_employees.category = $self;
-}
+// entity Categories : cuid {
+//     name         : String;
+//     isActive     : Boolean default true;
+//     type         : String enum {
+//         Project;
+//         NonProject = 'Non-Project';
+//         NotWork    = 'Not-Work';
+//     };
+//     customer     : Association to one Customers;
+//     to_entries   : Association to many Entries
+//                        on to_entries.category = $self;
+//     to_employees : Association to many Employees2Categories
+//                        on to_employees.category = $self;
+// }
 
-entity Employees2Categories : cuid {
-    employee : Association to one Employees;
-    category : Association to one Categories;
-}
+// entity Employees2Categories : cuid {
+//     employee : Association to one Employees;
+//     category : Association to one Categories;
+// }
 
 
 entity WBSElements as
@@ -94,5 +90,6 @@ entity WBSElements as
 entity Projects    as
     projection on api.Project {
         key ProjectExternalID  as ID,
-            ProjectDescription as description
+            ProjectDescription as description,
+            to_entries : Association to many Entries on to_entries.to_project = $self
     }

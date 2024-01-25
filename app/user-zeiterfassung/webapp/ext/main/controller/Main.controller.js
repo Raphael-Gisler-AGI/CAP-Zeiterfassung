@@ -1,8 +1,13 @@
-sap.ui.define( [ 'sap/fe/core/PageController' ],
-    function(PageController) {
-        'use strict';
+sap.ui.define(["./BaseController"], function (BaseController) {
+  "use strict";
 
-        return PageController.extend('userzeiterfassung.ext.main.Main', {
-        });
-    }
-);
+  return BaseController.extend("userzeiterfassung.ext.main.controller.Main", {
+    onPressCreateEntry() {
+      this.openCreateEntryDialog();
+    },
+    onPressDeleteEntries(oEvent) {
+      const selectedContexts = this.byId("LineItemTable").getSelectedContexts();
+      this.openEntryDeleteDialog(selectedContexts);
+    },
+  });
+});

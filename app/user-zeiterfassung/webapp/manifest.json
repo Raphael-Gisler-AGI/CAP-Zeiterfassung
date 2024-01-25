@@ -13,7 +13,7 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:fpm",
       "version": "1.11.4",
-      "toolsId": "88057c8b-5931-4834-a8d4-ef1aa8c76257"
+      "toolsId": "cb957a00-7bb7-49d0-835e-5a876db5877f"
     },
     "dataSources": {
       "mainService": {
@@ -84,11 +84,12 @@
       "css": []
     },
     "rootView": {
+      "id": "appView",
       "viewName": "userzeiterfassung.ext.main.view.Root"
     },
     "routing": {
       "config": {
-        "controlId": "appContent"
+				"controlId": "myNavContainer"
       },
       "routes": [
         {

@@ -2,53 +2,34 @@
     id="entryDialog"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
-    xmlns:form="sap.ui.layout.form"
-    title="Entry">
+    xmlns:form="sap.ui.layout.form">
     <beginButton>
         <Button
             press=".onPressSaveEntryDialog"
-            type="Emphasized"
-            text="Save" />
+            text="Create" />
     </beginButton>
     <endButton>
         <Button
-            press=".onPressCancelEntryDialog"
-            type="Ghost"
-            text="Cancel" />
+            press=".onPressCloseEntryDialog"
+            text="Close" />
     </endButton>
-    <form:SimpleForm>
-        <Label text="Description" />
-        <TextArea
-            required="true"
-            value="{description}" />
-        <Label text="Categories" />
-        <Select
-            required="true"
-            forceSelection="false"
-            selectedKey="{category_ID}"
-            items="{/Categories}">
-            <core:Item
-                key="{ID}"
-                text="{name}" />
-        </Select>
-        <Label text="Start Time" />
-        <DateTimePicker
-            dateValue="{startTime}"
-            minutesStep="15"
-            required="true" />
-        <Label text="End Time" />
-        <DateTimePicker
-            dateValue="{endTime}"
-            minutesStep="15"
-            required="true" />
-        <Label text="Ticket" />
-        <Select
-            forceSelection="false"
-            selectedKey="{ticket_ID}"
-            items="{/Tickets}">
-            <core:Item
-                key="{ID}"
-                text="#{number} {description}" />
-        </Select>
-    </form:SimpleForm>
+    <content>
+        <form:SimpleForm>
+            <Label text="{i18n>description}" />
+            <TextArea
+                value="{description}" />
+            <Select
+                selectedKey="{to_project_ID}"
+                forceSelection="false"
+                items="{/Projects}">
+                <core:Item
+                    key="{ID}"
+                    text="{description}" />
+            </Select>
+            <Label text="{i18n>startTime}" />
+            <TimePicker
+                dateValue="{startTime}" />
+            <Label text="{i18n>endTime}" />
+        </form:SimpleForm>
+    </content>
 </Dialog>
