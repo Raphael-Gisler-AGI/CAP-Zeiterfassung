@@ -5,7 +5,7 @@ const cds = require("@sap/cds");
 
 class UserService extends cds.ApplicationService {
   async init() {
-    this.project = await cds.connect.to("API_PROJECT_V3");
+    this.apis = await this.getAPIS();
 
     const { Entries, Projects } = this.entities;
 
@@ -15,10 +15,21 @@ class UserService extends cds.ApplicationService {
     });
 
     this.on("READ", Projects, async (req) => {
-      return await this.project.run(req.query);
+      return await this.apis.get("API_PROJECT_V3").run(req.query);
     });
 
     return await super.init();
+  }
+
+  async getAPIS() {
+    const services = Object.values(cds.model.services);
+    const promises = services
+      .filter((service) => service["@cds.external"])
+      .map((service) => {
+        return cds.connect.to(service.name);
+      });
+    const apis = await Promise.all(promises);
+    return new Map(apis.map((api) => [api.name, api]));
   }
 
   async _expand(data, columns, expandedColumn) {
@@ -60,23 +71,32 @@ class UserService extends cds.ApplicationService {
 
   _getRemoteObject(definitions, currentEntity, column) {
     const associationName = column.ref[0];
-    const association = definitions[currentEntity].associations[associationName];
+    const association =
+      definitions[currentEntity].associations[associationName];
 
     // TODO: Test if propper key
     const key = association.keys[0].ref[0];
     const associationKey = association.keys[0].$generatedFieldName;
 
     const expandEntityName = association.target;
-    const entityPath = definitions[expandEntityName].projection.from.ref[0];
-    const isFromRemote = definitions[entityPath].query?.source["@cds.external"];
+    const entity = definitions[expandEntityName];
 
-    if (isFromRemote) {
-      return {
-        associationKey: associationKey,
-        key: key,
-      };
+    const entitySchemaPath = entity.projection.from.ref[0];
+    const entitySchema = definitions[entitySchemaPath];
+
+    const isFromRemote = entitySchema.query?.source["@cds.external"];
+
+    if (!isFromRemote) {
+      return undefined;
     }
-    return undefined;
+    const service = entitySchema.projection.from.ref[0].split(".")[0];
+    return {
+      associationName: associationName,
+      associationKey: associationKey,
+      key: key,
+      entity: entity,
+      service: service,
+    };
   }
 
   async _autoExpand(req, next) {
@@ -109,13 +129,48 @@ class UserService extends cds.ApplicationService {
       this._addId(columns, remoteObject.associationKey);
     });
 
-    let entries = await next();
+    let data = await next();
 
-    if (!Array.isArray(entries)) {
-      entries = [entries];
+    if (!Array.isArray(data)) {
+      data = [data];
     }
 
-    return;
+    for (let i = 0; i < remoteObjects.length; i++) {
+      const remoteObject = remoteObjects[i];
+      const expandColumns = columns[remoteObject.index].expand;
+
+      this._addId(expandColumns, remoteObject.key);
+
+      const expandIDs = [
+        ...new Set(
+          data.reduce((expandColumn, item) => {
+            if (item[remoteObject.associationKey]) {
+              expandColumn.push(item[remoteObject.associationKey]);
+            }
+            return expandColumn;
+          }, [])
+        ),
+      ];
+
+      if (expandIDs.length <= 0) {
+        return;
+      }
+
+      const expands = await this.apis.get(remoteObject.service).run(
+        SELECT(expandColumns)
+          .from(remoteObject.entity)
+          .where({ [remoteObject.key]: expandIDs })
+      );
+
+      const mExpands = new Map(expands.map((expand) => [expand.ID, expand]));
+
+      data.forEach((item) => {
+        item[remoteObject.associationName] = mExpands.get(
+          item[remoteObject.associationKey]
+        );
+        delete item[remoteObject.associationKey];
+      });
+    }
   }
 
   async _handleExpand(req, next, expandedEntity, associationName, keyName) {
