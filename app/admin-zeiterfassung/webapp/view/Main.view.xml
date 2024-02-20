@@ -2,36 +2,22 @@
     controllerName="adminzeiterfassung.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Table
-        itemPress=".onNavProject"
-        items="{/Projects}">
+    <Table items="{/Projects}">
         <headerToolbar>
             <OverflowToolbar>
                 <Title
                     titleStyle="H3"
                     text="Projects" />
-                <ToolbarSpacer />
-                <Button
-                    press=".onPressCreateProject"
-                    type="Emphasized"
-                    text="Create Project"
-                    icon="sap-icon://add" />
             </OverflowToolbar>
         </headerToolbar>
         <columns>
             <Column>
                 <Text text="Name" />
             </Column>
-            <Column>
-                <Text text="Customer" />
-            </Column>
         </columns>
         <items>
-            <ColumnListItem
-                press=".onNavProject"
-                type="Navigation">
+            <ColumnListItem>
                 <Text text="{description}" />
-                <Text text="{customer/name}" />
             </ColumnListItem>
         </items>
     </Table>

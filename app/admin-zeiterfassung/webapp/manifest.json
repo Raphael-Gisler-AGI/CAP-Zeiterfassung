@@ -93,16 +93,6 @@
       },
       "routes": [
         {
-          "name": "RouteManageProject",
-          "pattern": "manageProject/:id:",
-          "target": "TargetManageProject"
-        },
-        {
-          "name": "RouteProject",
-          "pattern": "project/{id}",
-          "target": "TargetProject"
-        },
-        {
           "name": "RouteMain",
           "pattern": ":?query:",
           "target": "TargetMain"
@@ -117,14 +107,6 @@
         "TargetMain": {
           "viewId": "Main",
           "viewName": "Main"
-        },
-        "TargetProject": {
-          "viewId": "Project",
-          "viewName": "Project"
-        },
-        "TargetManageProject": {
-          "viewId": "ManageProject",
-          "viewName": "ManageProject"
         },
         "TargetNotFound": {
           "viewId": "NotFound",
