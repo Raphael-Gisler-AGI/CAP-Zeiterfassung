@@ -1,18 +1,16 @@
-<Popover
+<ResponsivePopover
     xmlns="sap.m"
     xmlns:macros="sap.fe.macros">
+    <content>
+		<macros:Form metaPath="@com.sap.vocabularies.UI.v1.FieldGroup#DetailForm" />
+    </content>
     <beginButton>
         <Button
             text="Edit" />
     </beginButton>
     <endButton>
         <Button
+            press=".onPressDetailDelete"
             text="Delete" />
     </endButton>
-    <content>
-        <!-- <macros:Form
-            id="myForm"
-            metaPath="@com.sap.vocabularies.UI.v1.FieldGroup#DetailForm"
-            title="Heheheha" /> -->
-    </content>
-</Popover>
+</ResponsivePopover>

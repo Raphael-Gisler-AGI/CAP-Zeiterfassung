@@ -60,26 +60,6 @@ entity Timer : cuid {
 
 entity Templates : cuid {}
 
-// entity Categories : cuid {
-//     name         : String;
-//     isActive     : Boolean default true;
-//     type         : String enum {
-//         Project;
-//         NonProject = 'Non-Project';
-//         NotWork    = 'Not-Work';
-//     };
-//     customer     : Association to one Customers;
-//     to_entries   : Association to many Entries
-//                        on to_entries.category = $self;
-//     to_employees : Association to many Employees2Categories
-//                        on to_employees.category = $self;
-// }
-
-// entity Employees2Categories : cuid {
-//     employee : Association to one Employees;
-//     category : Association to one Categories;
-// }
-
 
 entity WBSElements as
     projection on api.WBSElement {
@@ -91,5 +71,5 @@ entity Projects    as
     projection on api.Project {
         key ProjectExternalID  as ID,
             ProjectDescription as description,
-            to_entries : Association to many Entries on to_entries.to_project = $self
+            to_WBSElement : Association to one WBSElements on to_WBSElement.ID = $self.ID
     }

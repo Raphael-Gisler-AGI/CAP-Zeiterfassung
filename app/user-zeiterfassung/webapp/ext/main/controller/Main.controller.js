@@ -5,7 +5,7 @@ sap.ui.define(["./BaseController"], function (BaseController) {
     onPressCreateEntry() {
       this.openCreateEntryDialog();
     },
-    onPressDeleteEntries(oEvent) {
+    onPressDeleteEntries() {
       const selectedContexts = this.byId("LineItemTable").getSelectedContexts();
       this.openEntryDeleteDialog(selectedContexts);
     },

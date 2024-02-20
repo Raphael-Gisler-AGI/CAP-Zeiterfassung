@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="userzeiterfassung.ext.main.controller.Calendar"
+controllerName="userzeiterfassung.ext.main.controller.Calendar"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:unified="sap.ui.unified"
     xmlns="sap.m">

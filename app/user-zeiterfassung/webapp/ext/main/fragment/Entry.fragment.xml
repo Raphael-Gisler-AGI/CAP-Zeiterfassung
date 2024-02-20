@@ -18,6 +18,7 @@
             <Label text="{i18n>description}" />
             <TextArea
                 value="{description}" />
+            <Label text="{i18n>project}" />
             <Select
                 selectedKey="{to_project_ID}"
                 forceSelection="false"
@@ -30,6 +31,17 @@
             <TimePicker
                 dateValue="{startTime}" />
             <Label text="{i18n>endTime}" />
+            <TimePicker
+                dateValue="{startTime}" />
+            <Label text="{i18n>timer}" />
+            <Select
+                selectedKey="{to_ticket_ID}"
+                forceSelection="false"
+                items="{/Tickets}">
+                <core:Item
+                    key="{ID}"
+                    text="{number} {description}" />
+            </Select>
         </form:SimpleForm>
     </content>
 </Dialog>

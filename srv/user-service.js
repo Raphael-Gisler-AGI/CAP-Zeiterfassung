@@ -1,20 +1,16 @@
 const cds = require("@sap/cds");
 
-// Check for expand
-// Check expands to remote service
-
 class UserService extends cds.ApplicationService {
   async init() {
     this.apis = await this.getAPIS();
 
-    const { Entries, Projects } = this.entities;
+    const { Entries, Projects, WBSElements } = this.entities;
 
     this.on("READ", Entries, async (req, next) => {
       return await this._autoExpand(req, next);
-      // return await this._handleExpand(req, next, Projects, "to_project", "ID");
     });
 
-    this.on("READ", Projects, async (req) => {
+    this.on("READ", [Projects, WBSElements], async (req) => {
       return await this.apis.get("API_PROJECT_V3").run(req.query);
     });
 

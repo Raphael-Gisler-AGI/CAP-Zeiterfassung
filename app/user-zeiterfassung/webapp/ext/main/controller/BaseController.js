@@ -17,18 +17,38 @@ sap.ui.define(["sap/fe/core/PageController", "sap/m/MessageBox"], function (
         return this.getAppComponent().getModel(modelName);
       },
 
+      _getText(tag) {
+        return this.getModel("i18n").getResourceBundle().getText(tag);
+      },
+
+      async createEntry(content) {
+        const entries = this.getModel().bindList("/Entries");
+        const result = entries.create(content);
+        this.getView().setBusy(true);
+        await result.created();
+        this.getView().setBusy(false);
+        return result;
+      },
+      deleteEntries(entryContexts) {
+        entryContexts.forEach((entryContext) => {
+          entryContext.delete("deleteEntries");
+        });
+        this.getModel().submitBatch("deleteEntries");
+      },
+
       // Entry Delete Dialog
-      openEntryDeleteDialog(entryContexts) {
-        MessageBox.show("delete?", {
+      openEntryDeleteDialog(entryContext) {
+        MessageBox.show(this._getText("confirmDeleteMessage"), {
           icon: MessageBox.Icon.WARNING,
-          title: "heheheha",
+          title: "Delete",
           actions: [MessageBox.Action.DELETE, MessageBox.Action.CANCEL],
+          emphasizedAction: MessageBox.Action.DELETE,
           onClose: (response) => {
             if (response === MessageBox.Action.DELETE) {
-              entryContexts.forEach((entryContext) => {
-                entryContext.delete("deleteEntries");
-              });
-              this.getModel().submitBatch("deleteEntries");
+              if (!Array.isArray(entryContext)) {
+                entryContext = [entryContext];
+              }
+              this.deleteEntries(entryContext);
             }
           },
         });
