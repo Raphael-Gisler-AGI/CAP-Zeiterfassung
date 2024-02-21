@@ -9,13 +9,17 @@
     "@sap-cloud-sdk/http-client": "^3.10.0",
     "@sap-cloud-sdk/resilience": "^3.10.0",
     "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@sap/xssec": "^3",
     "cds-swagger-ui-express": "^0.6.0",
     "express": "^4",
-    "@sap/cds-hana": "^2"
+    "passport": "^0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
     "@sap/ux-specification": "^1.120.2",
+    "rimraf": "^5.0.5",
     "sqlite3": "^5.1.6"
   },
   "scripts": {
@@ -44,6 +48,9 @@
       "[production]": {
         "db": {
           "kind": "hana"
+        },
+        "auth": {
+          "kind": "xsuaa"
         }
       }
     }
@@ -53,5 +60,8 @@
     "app/user-zeiterfassung",
     "app/user-zeiterfassung",
     "app/user-zeiterfassung"
-  ]
+  ],
+  "engines": {
+    "node": "^18"
+  }
 }

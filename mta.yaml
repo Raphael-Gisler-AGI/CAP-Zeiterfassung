@@ -1,0 +1,58 @@
+_schema-version: '3.1'
+ID: cap-zeiterfassung
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install --production
+        - npx cds build --production
+        # - npx rimraf gen/db/src/gen/data
+modules:
+  - name: cap-zeiterfassung-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: cap-zeiterfassung-db
+      - name: cap-zeiterfassung-destination
+      - name: cap-zeiterfassung-uaa
+
+  - name: cap-zeiterfassung-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: cap-zeiterfassung-db
+
+resources:
+  - name: cap-zeiterfassung-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: cap-zeiterfassung-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+  - name: cap-zeiterfassung-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: cap-zeiterfassung-${org}-${space}
+        tenant-mode: dedicated
